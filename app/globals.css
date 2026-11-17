@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Tema "dark" klassi orqali boshqariladi (<html class="dark">) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  --chart-grid: #e2e8f0;
+  --chart-text: #64748b;
+  --tooltip-bg: #ffffff;
+  --tooltip-border: #e2e8f0;
+  --tooltip-text: #0f172a;
+}
+
+.dark {
+  color-scheme: dark;
+  --chart-grid: #334155;
+  --chart-text: #94a3b8;
+  --tooltip-bg: #0f172a;
+  --tooltip-border: #334155;
+  --tooltip-text: #e2e8f0;
+}
+
+/* Tailwind 4 tugmalarga kursor: pointer bermaydi, shuning uchun bosiladigan hamma narsaga o'zimiz beramiz */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  select:not(:disabled),
+  summary,
+  label[for],
+  input:is([type="checkbox"], [type="radio"], [type="file"], [type="date"], [type="time"], [type="month"], [type="datetime-local"]):not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  select:disabled,
+  input:disabled {
+    cursor: not-allowed;
+  }
+
+  input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  background: #020617;
+  color: #e2e8f0;
+}
+
+/* Yengil scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 transparent;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out;
+}
+
+.animate-pop-in {
+  animation: pop-in 0.18s ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.2s ease-out;
+}
+
+/* Bosib chiqarishda faqat kontent */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
